@@ -1,18 +1,18 @@
 const exec = require("child_process").exec;
 
-function start(){
+function start(response){
     console.log("Request handle 'start' was called")
-    let content = "empty";
-
-    exec("ls-lah",function(err,stdout,stderr){
-        content = stdout;
-    });
-    return content;
+    exec("ls -lah",function (error,stdout,stderr) {
+        response.writeHead(200,{"content-Type":"text/plain"});
+        response.write(stdout);
+        response.end();
+      })
 };
-function upload(){
+function upload(response){
     console.log("Request handle 'upload' was called");
-    return "Hello Upload";
-
+    response.writeHead(200,{"content-Type":"text/plain"});
+    response.write("hello upload");
+    response.end();
 };
 exports.start = start;
 exports.upload = upload; 
