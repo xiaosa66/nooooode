@@ -1,4 +1,6 @@
-function start(response) {
+let queryString = require("querystring");
+
+function start(response,postData) {
     console.log("Request handler 'start' was called.");
   
     var body = '<html>'+
@@ -13,16 +15,18 @@ function start(response) {
       '</form>'+
       '</body>'+
       '</html>';
+
+    // let body = '/body.html';
   
       response.writeHead(200, {"Content-Type": "text/html"});
       response.write(body);
       response.end();
   }
   
-  function upload(response) {
+  function upload(response,postData) {
     console.log("Request handler 'upload' was called.");
     response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write("Hello Upload");
+    response.write("you have sent " + queryString.parse(postData).text);
     response.end();
   }
   
